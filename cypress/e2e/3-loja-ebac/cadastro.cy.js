@@ -21,7 +21,6 @@ describe('Funcionalidade: cadastro', () => {
    })
 
    it('Deve completar o cadastro com sucesso - Usando variáveis', () => {
-
     var email = faker.internet.email()
     var nome = faker.person.firstName()
     var sobrenome = faker.person.lastName()
