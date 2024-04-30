@@ -1,9 +1,9 @@
 /// <reference types="cypress"/>
 
-describe ('Funcionalidade: login', () => {
+describe('Funcionalidade: login', () => {
     const perfil = require('../../fixtures/perfil.json')
 
-})
+    
 
     beforeEach(() => {
         cy.visit('minha-conta')
@@ -12,12 +12,13 @@ describe ('Funcionalidade: login', () => {
     afterEach(() => {
         cy.screenshot()
     });
+
     it('Deve fazer login com sucesso', () => {
         cy.get('#username').type('catia.lisboa@teste.com.br')
         cy.get('#password').type('teste@123')
         cy.get('.woocommerce-form > .button').click()
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, catia.lisboa')
-    })
+    });
 
     it('Deve exibir uma mensagem de erro ao inserir usuário inválido', () => {
         cy.get('#username').type('catialisboa@teste.com.br')
@@ -38,19 +39,20 @@ describe ('Funcionalidade: login', () => {
         cy.get('#password').type(perfil.senha)
         cy.get('.woocommerce-form > .button').click()
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, catia.lisboa')
-        
+
     });
 
     it('Deve fazer login com sucesso - Usando fixture', () => {
-        cy.fixture('perfil').then( dados => {
+        cy.fixture('perfil').then(dados => {
             cy.get('#username').type(dados.usuario)
             cy.get('#password').type(dados.senha)
             cy.get('.woocommerce-form > .button').click()
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
         });
-
-    it.only('Deve fazer login com sucesso - usando comandos customizados', () => {
-        cy.login('catia.lisboa@teste.com.br', 'teste@123')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, catia.lisboa')
     });
-})
+    it('Deve fazer login com sucesso - usando comandos customizados', () => {
+            cy.login('catia.lisboa@teste.com.br', 'teste@123')
+            cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, catia.lisboa')
+    });
+        
+});
